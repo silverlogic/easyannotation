@@ -88,13 +88,14 @@ export class Utils {
     public static exportToPNG(imageElement: HTMLImageElement, svgElement: SVGSVGElement, callback: (imageData: string) => void) {
         let width = svgElement.width.baseVal.value,
             height = svgElement.height.baseVal.value;
-            
+        let thisImageElement = imageElement
+        thisImageElement.setAttribute('crossOrigin', 'anonymous');
         let canvas = document.createElement('canvas'),
             context = canvas.getContext('2d');
 
         canvas.width = width;
         canvas.height = height;
-        context.drawImage(imageElement, 0, 0, width, height);
+        context.drawImage(thisImageElement, 0, 0, width, height);
 
         let parser = new DOMParser(),
             svgContent = svgElement.outerHTML,
@@ -186,7 +187,7 @@ export class Utils {
                     tempCanvas.width = w;
                     tempCanvas.height = h;
 
-                    tempContext.drawImage(imageElement, blurRect.x, blurRect.y, w, h, 0, 0, w, h);
+                    tempContext.drawImage(thisImageElement, blurRect.x, blurRect.y, w, h, 0, 0, w, h);
                     let imageData = tempContext.getImageData(0, 0, w, h);
                     Blur.blurData(imageData, Math.floor(blurRect.b * 2.5));
                     tempContext.putImageData(imageData, 0, 0);
@@ -210,7 +211,7 @@ export class Utils {
 
             canvas.width = width;
             canvas.height = height;
-            context.drawImage(imageElement, 0, 0, width, height);
+            context.drawImage(thisImageElement, 0, 0, width, height);
             
             if (allBluring.length == 0) {
                 drawFinalImage();
