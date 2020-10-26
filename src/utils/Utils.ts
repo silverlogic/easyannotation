@@ -164,6 +164,8 @@ export class Utils {
         let svgBlob = new Blob([svgContent], {type: 'image/svg+xml'}),
             url = URL.createObjectURL(svgBlob),
             image = new Image();
+            image.setAttribute('crossOrigin', 'anonymous');
+            image.src = url;
         
         image.onload = function() {
             let d = document,
@@ -191,6 +193,8 @@ export class Utils {
 
                     let pngImage = tempCanvas.toDataURL('image/png'),
                         tempImage = new Image(w, h);
+                        tempImage.setAttribute('crossOrigin', 'anonymous');
+                        tempImage.src = url;
 
                     tempImage.onload = function() {
                         context.drawImage(tempImage, blurRect.x, blurRect.y);
