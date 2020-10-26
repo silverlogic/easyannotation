@@ -167,6 +167,7 @@ export class Utils {
             image = new Image();
             image.setAttribute('crossOrigin', 'anonymous');
             image.src = url;
+            thisImageElement.src = url;
         
         image.onload = function() {
             let d = document,
