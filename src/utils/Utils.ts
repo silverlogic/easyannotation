@@ -164,17 +164,14 @@ export class Utils {
             url = URL.createObjectURL(svgBlob),
             image = new Image();
             image.setAttribute("crossOrigin", "anonymous");
-            image.src = imageElement.src;
+            image.src = url;
         image.onload = function() {
             let d = document,
                 drawFinalImage = function() {
                     console.log("image", image)
                     console.log("canvas", canvas)
                     context.drawImage(image, 0, 0);
-                    URL.revokeObjectURL(url);
                     let imageSrc = canvas.toDataURL('image/png');
-                    console.log("afterimage", image)
-
                     callback(imageSrc);
                 },
                 drawImage = function(allBluring: Array<BlurEffect>, index: number) {
