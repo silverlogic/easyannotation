@@ -163,14 +163,12 @@ export class Utils {
         let svgBlob = new Blob([svgContent], {type: 'image/svg+xml'}),
             url = URL.createObjectURL(svgBlob),
             image = new Image();
-            image.setAttribute("crossOrigin", "anonymous");
-            image.src = url;
+
         image.onload = function() {
             let d = document,
                 drawFinalImage = function() {
-                    console.log("image", image)
-                    console.log("canvas", canvas)
                     context.drawImage(image, 0, 0);
+                    URL.revokeObjectURL(url);
                     let imageSrc = canvas.toDataURL('image/png');
                     callback(imageSrc);
                 },
@@ -206,7 +204,6 @@ export class Utils {
             canvas.width = width;
             canvas.height = height;
             context.drawImage(imageElement, 0, 0, width, height);
-            console.log("allBluring.length", allBluring.length)
             if (allBluring.length == 0) {
                 drawFinalImage();
             } else {

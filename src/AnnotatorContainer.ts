@@ -321,6 +321,8 @@ export class AnnotatorContainer {
         let patternID = me.config.annotatorIdx;
         svgContainer.id = 'easyAnnotatorSVGContainer' + patternID;
         mainPattern.setAttribute('id', 'mainFillPattern' + patternID);
+        // const img = document.querySelector('#popup-' + imageIndex)
+        me.imageElement.setAttribute('src', me.imageElement.src.replace('https://cors-anywhere.herokuapp.com/', ''))
         mainPattern.innerHTML = '<image preserveAspectRatio="none" width="' + w + '" height="' + h + '" xlink:href="' + 
                     me.imageElement.src + '"/>';
         
