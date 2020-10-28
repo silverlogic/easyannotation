@@ -163,10 +163,12 @@ export class Utils {
         let svgBlob = new Blob([svgContent], {type: 'image/svg+xml'}),
             url = URL.createObjectURL(svgBlob),
             image = new Image();
+            image.setAttribute("crossOrigin", "anonymous")
 
         image.onload = function() {
             let d = document,
                 drawFinalImage = function() {
+                    console.log("image", image)
                     context.drawImage(image, 0, 0);
                     URL.revokeObjectURL(url);
                     let imageSrc = canvas.toDataURL('image/png');
