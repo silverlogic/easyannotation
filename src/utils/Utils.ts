@@ -90,7 +90,7 @@ export class Utils {
             height = svgElement.height.baseVal.value;
         const canvas = document.createElement('canvas'),
             context = canvas.getContext('2d');
-
+        canvas.setAttribute("crossOrigin", "anonymous");
         canvas.width = width;
         canvas.height = height;
         context.drawImage(imageElement, 0, 0);
@@ -164,7 +164,6 @@ export class Utils {
             url = URL.createObjectURL(svgBlob),
             image = new Image();
             image.setAttribute("crossOrigin", "anonymous")
-            image.setAttribute("src", url)
         image.onload = function() {
             let d = document,
                 drawFinalImage = function() {
